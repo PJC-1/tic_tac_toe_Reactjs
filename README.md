@@ -55,3 +55,76 @@ function Square(props){
 }
 ```
 **remember** you'll need to change **this.props** to **props**. Also we also changed ``` onClick={() => props.onClick()} ``` to just ``` onClick={props.onClick} ```, as passing the function down is enough for our example. Note that ``` onClick={props.onClick()} ``` would not work because it would call props.onClick immediately instead of passing it down.
+
+Noteworthy
+-------------
+-	A **React component class**, or **React component type** takes in paramters, called **props**, and returns a hierarchy of views to display via the **render** method.
+
+-	The **render** method returns a description of what you want to render, and then React takes that description and renders it to the screen. In particular, **render** returns a **React element**, which is a lightweight description of what to render. Most React developers use a special syntax called JSX which makes it easier to write these structures. The ``` <div /> ``` syntax is transformed at build time to ``` React.createElement('div') ```.
+
+example:
+```
+
+<div className="shopping-list">
+  <h1>Shopping List for {props.name}</h1>
+  <ul>
+    <li>Instagram</li>
+    <li>WhatsApp</li>
+    <li>Oculus</li>
+  </ul>
+</div>
+
+```
+
+is equal to:
+```
+
+React.createElement(
+  "div",
+  { className: "shopping-list" },
+  React.createElement(
+    "h1",
+    null,
+    "Shopping List for ",
+    props.name
+  ),
+  React.createElement(
+    "ul",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "Instagram"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "WhatsApp"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "Oculus"
+    )
+  )
+);
+
+```
+
+[link](https://babeljs.io/repl/#?presets=react&code_lz=DwEwlgbgBAxgNgQwM5IHIILYFMC8AiJACwHsAHUsAOwHMBaOMJAFzwD4AoKKYQgRlYDKJclWpQAMoyZQAZsQBOUAN6l5ZJADpKmLAF9gAej4cuwAK5wTXbg1YBJSswTV5mQ7c7XgtgOqEETEgAguTuYFamtgDyMBZmSGFWhhYchuAQrEA) to working example.
+
+- You can put any JavaScript expression within braces inside JSX. Each React element is a real JavaScript object that you can store in a variable or pass around your program.
+
+es6
+-------------
+- The JavaScript **arrow function** syntax. When passing a function as the **onClick** prop to a button tag we need to do something like this:
+```
+onClick={() => alert('click')}>
+
+```
+because doing:
+```
+onClick={alert('click')}
+
+```
+would alert immediately instead of when the button is clicked.
