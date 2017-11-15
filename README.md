@@ -110,10 +110,36 @@ React.createElement(
 );
 
 ```
-
 [link](https://babeljs.io/repl/#?presets=react&code_lz=DwEwlgbgBAxgNgQwM5IHIILYFMC8AiJACwHsAHUsAOwHMBaOMJAFzwD4AoKKYQgRlYDKJclWpQAMoyZQAZsQBOUAN6l5ZJADpKmLAF9gAej4cuwAK5wTXbg1YBJSswTV5mQ7c7XgtgOqEETEgAguTuYFamtgDyMBZmSGFWhhYchuAQrEA) to working example.
 
 - You can put any JavaScript expression within braces inside JSX. Each React element is a real JavaScript object that you can store in a variable or pass around your program.
+
+- Whenever ``` this.setState ``` is called, an update to the component is scheduled, causing React to merge in the passed state update and rerender the component along with its descendants.
+
+example:
+```
+ constructor(props) {
+   super(props);
+   this.state = {
+     value: null,
+   };
+ }
+
+render() {
+    return (
+      <button className="square" onClick={() => this.setState({value: 'X'})}>
+        {this.state.value}
+      </button>
+    );
+  }
+
+```
+- In the example above, when the component rerenders, ``` this.state.value ``` will be ``` 'X' ``` so you'll see an X in the grid. If you click on any square, an X should show up in it.
+
+- When you want to aggregate data from multiple children or to have two child components communicate with each other, move the state upwards so that it lives in the parent component. The parent can then pass the state back down to the children via props, so that the child components are always in sync with each other and with the parent.
+
+- Pulling state upwards like this is common when refactoring React components.
+
 
 es6
 -------------
