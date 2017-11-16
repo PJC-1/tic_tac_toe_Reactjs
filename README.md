@@ -140,6 +140,7 @@ render() {
 
 - Pulling state upwards like this is common when refactoring React components.
 
+- The **onClick** prop on the build-in DOM **<button>** component tells React to set up a click event listener.
 
 es6
 -------------
