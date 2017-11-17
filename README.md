@@ -142,6 +142,11 @@ render() {
 
 - The **onClick** prop on the build-in DOM **<button>** component tells React to set up a click event listener.
 
+- When a component no longer keeps its own state; it receives its value from its parent component and informs its parent when its clicked. We call components like this **controlled components**.
+
+
+
+
 es6
 -------------
 - The JavaScript **arrow function** syntax. When passing a function as the **onClick** prop to a button tag we need to do something like this:
