@@ -144,6 +144,16 @@ render() {
 
 - When a component no longer keeps its own state; it receives its value from its parent component and informs its parent when its clicked. We call components like this **controlled components**.
 
+-	React elements are first-class JS objects and we can store them or pass them around. To render multiple items in React, we pass an array of React elements. The most common way to build that array is to map over your array of data.
+
+-	When you render a list of items, React always stores some info about each item in the list. If you render a component that has state, that state needs to be stored - and regardless of how you implement your components, React stores a reference to the backing native views.
+	When you update that list, React needs to determine what has changed. You could've added, removed, rearranged, or updated items in the list. That why React asks you to specify a **key** property on each element in a list, a string to differentiate each component from its siblings.
+	If the items correspond to object in a database, the database ID is usually a good choice.
+	**key** is a special property that's reserved by React (along with **ref**, a more advanced feature). When an element is created, React pulls off the **key** property and stores the key directly on the returned element. Even though it may look like it is part of props, it cannot be referenced with **this.props.key**. React uses the key automatically while deciding which children to update; there is no way for a component to inquire about its own key.
+	When a list is rerendered, React takes each element in the new version and looks for one with a matching key in the previous list. When a key is added to the set, a component is created; when a key is removed, a component is destroyed. Keys tell React about the identity of each component, so that it can maintain the state across rerenders. If you change the key of a component, it will be completely destroyed and recreated with anew state.
+	**It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key hand, you may want to consider restructuring your data so that you do.
+	If you don't specify any key, React will warn you and fall back to using the array index as a key - which is not the correct choice if you ever reorder elements in the list or add/remove items anywhere but the bottom of the list. Explicitly passing **key={i}** silences the waring but has the same problem so isn't recommended in most cases.
+	Component keys don't need to be globally unique, only unique relative to the immediate siblings.
 
 
 
